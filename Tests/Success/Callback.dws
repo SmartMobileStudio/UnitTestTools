@@ -1,0 +1,21 @@
+uses
+  ECMA.Console;
+
+type TEventCallback = procedure(aCallback: procedure);
+
+var v : TEventCallback;
+
+v := procedure(aCallback: procedure)
+	begin
+		Console.Log('Hello');
+		aCallback;
+	end;
+	
+v(procedure
+  begin
+	  Console.Log('World');
+  end)
+
+
+
+
