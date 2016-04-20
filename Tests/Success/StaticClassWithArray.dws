@@ -1,0 +1,14 @@
+uses
+  ECMA.Console;
+
+var
+  StaticClass = class
+    Values: array [0..2] of array [0..1] of Integer = [
+      [0, 1],
+      [1, 2],
+      [2, 3]
+    ];
+  end;      
+
+for var Index := 0 to High(StaticClass.Values) do
+  Console.Log(StaticClass.Values[Index]);
