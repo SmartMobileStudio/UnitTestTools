@@ -1,3 +1,6 @@
+Tests
+-----
+
 This directory should only contain scripts/projects that are meant to be compiled by the command-line compiler unit test. There are two sub directories: 'Fail' and 'Success'
 
 The 'Fail' directory should only contain scripts/projects that are known to fail. When they fail they should return a certain error message. They should not crash the compiler.
