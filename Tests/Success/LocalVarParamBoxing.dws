@@ -1,0 +1,20 @@
+uses
+  ECMA.Console;
+
+procedure MyProc(var i: Integer);
+begin
+  i := 123;
+end;
+
+procedure Foo(i: Integer);
+begin
+  Console.Log(i);
+  MyProc(i);
+  Console.Log(i);
+end;
+
+var i: Integer;
+i := 456;
+Console.Log(i);
+Foo(i);
+Console.Log(i);

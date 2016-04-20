@@ -1,0 +1,15 @@
+uses
+  ECMA.Console;
+
+var 
+  o: Variant = new JObject;
+
+o.Hello := 'World';
+o.World := 'Hello';
+
+for var s in o do
+	Console.Log(s);
+	
+var name: String;
+for name in o do
+	Console.Log(o.hasOwnProperty(name));

@@ -127,8 +127,9 @@ begin
     else
     begin
       // check the exit code of the command-line compiler
-      Check(FExitCode = 0, Format('Compilation failed with exit code %d',
-        [FExitCode]));
+      Check(FExitCode = 0, Format('Compilation failed with exit code %d '#10 +
+        'and error log: %s',
+        [FExitCode, MessageOutput]));
     end;
   end;
 end;
