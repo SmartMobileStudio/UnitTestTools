@@ -11,6 +11,7 @@ type
   TSmartMobileStudioExternalCompiler = class(TSmartMobileStudioCustomScriptTest)
   strict private
     FPipedExecution: TPipedExecution;
+    FExitCode: Integer;
     procedure PipedExecutionExitHandler(Sender: TObject; ExitCode: Cardinal);
     procedure PipedExecutionNewLineHandler(Sender: TObject; const Text: string);
   protected
@@ -35,6 +36,8 @@ procedure TSmartMobileStudioExternalCompiler.SetUp;
 begin
   inherited;
 
+  FExitCode := 0;
+
   FPipedExecution := TPipedExecution.Create('smsc.exe -unit-path=.\RTL\ ' +
     ScriptFileName, '.', PipedExecutionNewLineHandler, PipedExecutionExitHandler);
 end;
@@ -50,6 +53,7 @@ end;
 procedure TSmartMobileStudioExternalCompiler.PipedExecutionExitHandler(Sender: TObject; ExitCode: Cardinal);
 begin
   FPipedExecution := nil;
+  FExitCode := ExitCode;
 end;
 
 procedure TSmartMobileStudioExternalCompiler.PipedExecutionNewLineHandler(Sender: TObject; const Text: string);
@@ -61,6 +65,7 @@ procedure TSmartMobileStudioExternalCompiler.Compile;
 begin
   inherited;
 
+  // peek command-line output
   while Assigned(FPipedExecution) do
     FPipedExecution.Peek;
 end;
@@ -75,23 +80,31 @@ begin
   // check if any command-line output is expected
   if FileExists(ScriptFileName + '.out') then
   begin
+    // load expected output and preprocess
     Expected := LoadTextFromFile(ScriptFileName + '.out');
     Expected := StringReplace(Expected, #$A, '', [rfReplaceAll]);
 
-    CheckEquals(Expected, FMessageOutput,
-      'The compiler output does not match!');
+    // compare the message output with expected output
+    CheckEquals(Expected, FMessageOutput, 'The compiler output does not match!');
   end;
 
   // check if any JS output is expected
   if FileExists(ScriptFileName + '.js') then
   begin
-    // now check for the reference
-    Check(FileExists(CompiledFileName));
+    // check the exit code of the command-line compiler
+    Check(FExitCode = 0, Format('Compilation failed with exit code %d',
+      [FExitCode]));
 
+    // now check for the reference
+    Check(FileExists(CompiledFileName), Format('File %s does not exist!',
+      [CompiledFileName]));
+
+    // load expected and actual JavaScript code
     Expected := LoadTextFromFile(ScriptFileName + '.js');
     Output := LoadTextFromFile(CompiledFileName);
-    CheckEquals(Expected, Output,
-      'The error message does not match!');
+
+    // check if both are identical
+    CheckEquals(Expected, Output, 'The error message does not match!');
   end
   else
   begin
