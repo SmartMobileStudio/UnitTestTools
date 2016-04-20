@@ -1,5 +1,9 @@
 SmartMS command-line compiler, (c) 2016 The Smart Company AS
-Building %FileName%
-[INFO] Compiling solution  ..
-[ERROR] Compilation failed! Error(s): 1 
-Syntax Error: Unknown name "This" [line: 1, column: 1]
+Building Fail\InvalidResource.pas
+[INFO] Building project ''...
+[INFO] Compiling...
+[INFO] Generating JavaScript...
+[INFO] Linking...
+Resource file [Invalid.file] not found
+Resource file [AnotherInvalid.file] not found
+[ERROR] Linking failed: Error: Some resources (2) were not found

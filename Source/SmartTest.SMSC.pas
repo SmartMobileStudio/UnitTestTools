@@ -103,14 +103,14 @@ begin
       Expected := LoadTextFromFile(ScriptFileName + '.error');
 
       // get relative input file
-      InputFile := ExtractRelativePath(GetCurrentDir, ExpandFileName(ScriptFileName));
+      InputFile := ExtractRelativePath(GetCurrentDir + '\', ExpandFileName(ScriptFileName));
 
       // replace the ScriptFileName variable with the actual ScriptFileName
       Expected := StringReplace(Expected, '%FileName%',
         InputFile, [rfReplaceAll, rfIgnoreCase]);
 
       // skip carriage returns
-      Expected := Trim(StringReplace(Expected, #$D, '', [rfReplaceAll]));
+      Expected := Trim(StringReplace(Expected, #$A, '', [rfReplaceAll]));
 
       // compare with actual message
       CheckEquals(Expected, Trim(MessageOutput),

@@ -92,8 +92,6 @@ begin
   else
     GetExitCodeProcess(FProcessInfo.hProcess, ExitCode);
 
-  OutputDebugString(PChar('Exit code: ' + IntToStr(ExitCode)));
-
   // fire 'OnExit' event
   if Assigned(FOnExit) then
     FOnExit(Self, ExitCode);
@@ -121,7 +119,6 @@ var
   LineBreakPos: Integer;
 begin
   AppRunning := WaitForSingleObject(FProcessInfo.hProcess, 10);
-  OutputDebugString(PChar(IntToStr(AppRunning)));
   if not PeekNamedPipe(FReadPipe, @FBuffer[0], CSizeReadBuffer, @BytesRead,
     @TotalBytesAvail, @BytesLeftThisMsg) then
   begin

@@ -12,8 +12,9 @@ uses
   System.UITypes,
   VCL.Dialogs,
   {$ENDIF}
-  SmartTest.SMSC in 'SmartTest.SMSC.pas',
-  SmartTest.Common in 'SmartTest.Common.pas';
+  SmartTest.Common in 'SmartTest.Common.pas',
+  SmartTest.PipedExecution in 'SmartTest.PipedExecution.pas',
+  SmartTest.SMSC in 'SmartTest.SMSC.pas';
 
 {$R *.RES}
 

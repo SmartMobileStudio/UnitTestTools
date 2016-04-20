@@ -195,6 +195,11 @@ begin
     for Index := 0 to MethodEnumerator.Methodcount - 1 do
       begin
         NameOfMethod := MethodEnumerator.NameOfMethod[Index];
+
+        // eventually exclude the execution test for 'fail' scripts
+        if (NameOfMethod <> 'TestRun') and (Pos('Fail', Self.Name) = 1) then
+          Continue;
+
         TestCase := ATestClass.Create(NameOfMethod);
         (TestCase as TSmartMobileStudioCustomScriptTest).ScriptFileName := FScriptFileName;
         Self.AddTest(TestCase as ITest);
