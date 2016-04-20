@@ -1,0 +1,12 @@
+uses
+  ECMA.Console;
+
+try
+  asm 
+    var testNull = null;
+    testNull.bug();
+  end;
+except
+  on e: Exception do
+    Console.Log(E.Message);
+end;
