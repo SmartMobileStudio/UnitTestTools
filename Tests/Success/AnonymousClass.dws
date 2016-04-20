@@ -1,5 +1,5 @@
 uses
-  NodeJS.Core;
+  BasicConsole;
 
 var v : Variant;
 

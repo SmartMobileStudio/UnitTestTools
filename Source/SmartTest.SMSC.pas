@@ -35,9 +35,8 @@ procedure TSmartMobileStudioExternalCompiler.SetUp;
 begin
   inherited;
 
-  FPipedExecution := TPipedExecution.Create('smsc.exe ' +
-    ExtractFileName(ScriptFileName), ExtractFileDir(ScriptFileName),
-    PipedExecutionNewLineHandler, PipedExecutionExitHandler);
+  FPipedExecution := TPipedExecution.Create('smsc.exe -unit-path=.\RTL\ ' +
+    ScriptFileName, '.', PipedExecutionNewLineHandler, PipedExecutionExitHandler);
 end;
 
 procedure TSmartMobileStudioExternalCompiler.TearDown;
