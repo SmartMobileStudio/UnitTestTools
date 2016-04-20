@@ -1,0 +1,6 @@
+type
+   TNative = class(JObject)
+      Field : Integer;
+      constructor Create(v : Integer = 1); overload; begin Field:=v; end;
+      procedure Test; overload; begin end;
+   end;

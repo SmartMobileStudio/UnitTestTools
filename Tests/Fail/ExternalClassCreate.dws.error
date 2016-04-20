@@ -1,0 +1,6 @@
+SmartMS command-line compiler, (c) 2016 The Smart Company AS
+Building Fail\ExternalClassCreate.dws
+[INFO] Building project ''...
+[INFO] Compiling...
+[ERROR] Compilation failed! Error(s): 1 
+Syntax Error: There is no accessible member with name "Create" [line: 15, column: 26]
