@@ -197,7 +197,7 @@ begin
         NameOfMethod := MethodEnumerator.NameOfMethod[Index];
 
         // eventually exclude the execution test for 'fail' scripts
-        if (NameOfMethod <> 'TestRun') and (Pos('Fail', Self.Name) = 1) then
+        if (NameOfMethod <> 'TestCompilation') and (Pos('Fail', Self.Name) = 1) then
           Continue;
 
         TestCase := ATestClass.Create(NameOfMethod);
@@ -210,7 +210,7 @@ begin
 end;
 {$ENDIF}
 
-procedure EnumerateTests(Dir: String);
+procedure EnumerateTests(Dir: string; Extension: string = '.dws');
 var
   SuiteScript: TSmartMobileStudioTestSuite;
   TestProjectFiles: TStringList;
@@ -222,7 +222,7 @@ begin
     if not DirectoryExists(Dir) then
       raise Exception.CreateFmt('Directory does not exists (%s)', [Dir]);
 
-    CollectFiles(Dir, '*.pas', TestProjectFiles);
+    CollectFiles(Dir, '*' + Extension, TestProjectFiles);
 
     for FileName in TestProjectFiles do
     begin
@@ -243,7 +243,8 @@ end;
 
 procedure InitializeTests;
 begin
-  EnumerateTests(CUnitTestPath + 'Success');
+  EnumerateTests(CUnitTestPath + 'Success', '.dws');
+  EnumerateTests(CUnitTestPath + 'Success', '.sproj');
   EnumerateTests(CUnitTestPath + 'Fail');
 end;
 
