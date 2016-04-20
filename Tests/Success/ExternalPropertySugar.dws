@@ -1,0 +1,17 @@
+uses
+  ECMA.Console;
+
+asm
+  function JExternal() { }
+end;
+
+type
+  JExternal = class external
+    property Field: String;
+  end;
+
+var o := new JExternal;
+o.Field := 'Hello';
+Console.Log(o.Field);
+o.Field := o.Field + ' World';
+Console.Log(o.Field);

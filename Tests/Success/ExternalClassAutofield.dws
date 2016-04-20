@@ -1,0 +1,34 @@
+uses
+  ECMA.Console;
+
+asm
+  function GetMyOne() {
+    return {
+      Field: "hello"
+    };
+  }
+end;
+
+type
+  TExternalClass = class external
+	  property Field: String;
+  end;
+   
+type
+  JInternal = class (JObject)
+    property Field: String;
+  end;
+
+function GetOne: TExternalClass; external "GetMyOne";
+
+var obj := GetOne;
+
+Console.Log(obj.Field);
+obj.Field := 'world';
+Console.Log(obj.Field);
+
+var obj2 := new JInternal;
+
+Console.Log(obj2.Field);
+obj2.Field := 'bye';
+Console.Log(obj2.Field);

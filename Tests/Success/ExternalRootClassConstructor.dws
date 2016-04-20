@@ -1,0 +1,17 @@
+uses
+  ECMA.Console;
+
+type
+  TNative = class(JObject)
+    Field: Integer;
+    constructor Create(v: Integer = 1); begin Field := v; end;
+  end;
+
+var obj := new TNative;
+Console.Log(obj.Field);
+
+obj := TNative.Create(2);
+Console.Log(obj.Field);
+
+obj := new TNative(3);
+Console.Log(obj.Field);

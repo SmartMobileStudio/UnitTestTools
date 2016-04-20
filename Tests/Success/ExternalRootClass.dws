@@ -1,0 +1,27 @@
+uses
+  ECMA.Console;
+
+type
+  TNative = class(JObject)
+    Field: String;
+    function GetIt: String;
+    begin
+      Result := 'Got ' + Field;
+    end;
+    procedure PrintIt;
+    begin
+      Console.Log(GetIt);
+    end;
+  end;
+
+var obj := new TNative;
+obj.Field := 'Hello';
+
+function Stringify(o: JObject): String;
+begin
+  asm @Result = JSON.stringify(@o); end;
+end;
+
+Console.Log(Stringify(obj));
+
+obj.PrintIt;

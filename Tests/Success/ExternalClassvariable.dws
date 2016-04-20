@@ -1,0 +1,27 @@
+uses
+  ECMA.Console;
+
+asm
+  var myVar = 'test';
+  var myVar2 = 'bug';
+end;
+
+type
+	Test = static class
+		class var Variable external "myVar": String;
+		class var Variable2 external "myVar2": String;
+		property Prop: String read Variable;
+		property Prop2: String read Variable2 write Variable2;
+	end;
+	
+var _myVar2 external 'myVar2' := 'world';
+
+Console.Log(Test.Variable);
+Console.Log(Test.Prop);
+Test.Variable := 'hello';
+Console.Log(Test.Prop);
+
+Console.Log(Test.Variable2);
+Console.Log(Test.Prop2);
+Test.Prop2 := 'bye';
+Console.Log(Test.Variable2);

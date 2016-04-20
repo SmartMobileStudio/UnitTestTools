@@ -1,0 +1,16 @@
+uses
+  ECMA.Console;
+
+type
+  JDate = class external 'Date'
+    class function UTC(y, m, d: Integer): Integer;
+  end;
+
+var f: Integer;
+
+f := JDate.UTC(2012, 8, 16);
+Console.Log(f);
+
+var jd: JDate;
+
+Console.Log(jd.UTC(2012, 8, 17));

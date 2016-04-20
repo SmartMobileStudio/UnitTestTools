@@ -1,0 +1,27 @@
+uses
+  ECMA.Console;
+
+asm
+  function GetMyOne() {
+     return {
+        MyField: "hello",
+        MyMethod: function (s) { return this.MyField+" "+s; }
+     };
+  }
+end;
+
+type
+  TExternalClass = class external
+    Field: String; external "MyField";
+    function Method(s: String): String; external "MyMethod";
+  end;
+
+function GetOne: TExternalClass; external "GetMyOne";
+
+var obj := GetOne;
+
+Console.Log(obj.Field);
+Console.Log(obj.Method('World'));
+
+obj.Field := 'bye bye';
+Console.Log(obj.Method('World'));

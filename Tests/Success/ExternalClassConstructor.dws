@@ -1,0 +1,26 @@
+uses
+  ECMA.Console;
+
+asm
+  function Apple(color) {
+    this.color = color;
+    this.getColor = function () {
+      return this.color + ' apple';
+    };
+  }
+end;
+
+type
+  TApple = class external 'Apple'
+    color: String;
+    function GetColor: String; external 'getColor';
+    constructor Create(color: String);
+  end;
+
+var a: TApple := new TApple("red");
+
+Console.Log(a.GetColor);
+Console.Log(TApple.Create("golden").GetColor);
+
+var w := new TApple("weird");
+Console.Log(w.color);

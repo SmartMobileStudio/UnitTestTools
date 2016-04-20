@@ -1,0 +1,2 @@
+JToDoList {
+  List: [ JToDoItem { Category: 'cat', ID: 42, Detail: 'test' } ] }

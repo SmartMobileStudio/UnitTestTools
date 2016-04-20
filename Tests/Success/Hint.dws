@@ -1,0 +1,6 @@
+procedure Dummy; deprecated;
+begin
+end;
+
+  Dummy;
+Dummy;

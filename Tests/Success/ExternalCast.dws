@@ -1,0 +1,13 @@
+uses
+  ECMA.Console;
+
+type
+  JString = class external
+    function concat(s: JString): JString;
+    function ToString: String; external 'toString';      
+  end;
+
+var s := 'world';
+
+Console.Log(JString(s).ToString);
+Console.Log(JString('Hello ').concat(JString(s)).ToString());

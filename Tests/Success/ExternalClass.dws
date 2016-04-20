@@ -1,0 +1,30 @@
+uses
+  ECMA.Console;
+
+asm
+  function GetOne() {
+    return {
+      Field: "hello",
+      Method: function (s) { return this.Field+" "+s; },
+      Length: 42      
+    };
+  }
+end;
+
+type
+  TExternalClass = class external
+    Field: String;
+    function Method(s: String): String;
+    Length: Integer;
+  end;
+
+function GetOne: TExternalClass; external;
+
+var obj := GetOne;
+
+Console.Log(obj.Field);
+Console.Log(obj.Method('World'));
+
+obj.Field := 'bye bye';
+Console.Log(obj.Method('World'));
+Console.Log(obj.Length);
