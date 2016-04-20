@@ -1,0 +1,42 @@
+uses
+  ECMA.Console;
+
+type
+  TMy = class
+    Field : Integer;
+    procedure IncField;
+    begin
+      asm
+        @Field += 1;
+      end;
+    end;
+    procedure IncField2;
+    begin
+      asm
+        @Self.Field += 1;
+      end;
+    end;
+   end;
+
+type
+  TRec = record
+    Field : Integer;
+    procedure IncField;
+    begin
+      asm
+        @Field += 1;
+      end;
+    end;
+  end;
+   
+var o := new TMy;
+Console.Log(o.Field);
+o.IncField;
+Console.Log(o.Field);
+o.IncField2;
+Console.Log(o.Field);
+
+var r : TRec;
+Console.Log(r.Field);
+r.IncField;
+Console.Log(r.Field);

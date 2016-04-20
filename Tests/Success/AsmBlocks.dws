@@ -1,0 +1,11 @@
+procedure PrintIt(s : String; n : Integer);
+begin
+  asm
+    if (@n<=0) { console.log("n<=0"); return };
+    for (;@n>0;@n--) console.log(@s);
+  end;
+end;
+
+PrintIt('hello',3);
+PrintIt('hello',0);
+PrintIt('world',1);

@@ -1,5 +1,5 @@
 uses
-  BasicConsole;
+  ECMA.Console;
 
 var v : Variant;
 

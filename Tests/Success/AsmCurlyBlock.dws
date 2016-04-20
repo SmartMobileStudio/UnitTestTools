@@ -1,0 +1,18 @@
+procedure PrintLn(s : Variant);
+begin
+  asm
+    console.log(@s);
+  end;
+end;
+
+var i : Integer;
+
+asm
+   if (!@i) {
+      @i = 123;
+      @PrintLn(@i);
+      @i++;
+   }
+end;
+
+PrintLn(i);

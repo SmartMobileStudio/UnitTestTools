@@ -1,0 +1,13 @@
+procedure PrintOneOrTwo(b : Boolean);
+begin
+  asm
+    console.log(@b?'1':'2');
+  end;
+end;
+
+
+PrintOneOrTwo(True);
+PrintOneOrTwo(False);
+
+
+

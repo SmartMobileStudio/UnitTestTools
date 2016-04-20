@@ -1,0 +1,44 @@
+uses
+  ECMA.Console;
+ 
+procedure GetOne(var f1 : Float; var v1 : Variant);
+begin
+   asm
+      (@f1).v = 1.0;
+      (@v1).v = 'hello';
+   end;
+end;
+
+procedure GetTwo(var f2 : Float; var v2 : Variant);
+var
+   tf : Float;
+   tv : Variant;
+begin
+   asm
+      @tf = 2.0;
+      @tv = 'world';
+   end;
+   f2:=tf;
+   v2:=tv;
+end;
+
+procedure GetThree(var f3 : Float; var v3 : Variant);
+begin
+   f3:=3;
+   v3:='done';
+end;
+
+var f : Float;
+var v : Variant;
+
+GetOne(f, v);
+Console.Log(f);
+Console.Log(v);
+
+GetTwo(f, v);
+Console.Log(f);
+Console.Log(v);
+
+GetThree(f, v);
+Console.Log(f);
+Console.Log(v);

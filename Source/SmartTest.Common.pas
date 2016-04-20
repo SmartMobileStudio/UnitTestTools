@@ -70,7 +70,7 @@ end;
 
 procedure TSmartMobileStudioCustomScriptTest.PipedExecutionNewLineHandler(Sender: TObject; const Text: string);
 begin
-  FExecutionOutput := FExecutionOutput + Text;
+  FExecutionOutput := FExecutionOutput + Text + #10;
 end;
 
 procedure TSmartMobileStudioCustomScriptTest.Compile;
@@ -134,9 +134,9 @@ begin
   if FileExists(ScriptFileName + '.result') then
   begin
     Expected := LoadTextFromFile(ScriptFileName + '.result');
-    Expected := StringReplace(Expected, #$A, '', [rfReplaceAll]);
+    Expected := Trim(StringReplace(Expected, #$D, '', [rfReplaceAll]));
 
-    CheckEquals(Expected, FExecutionOutput,
+    CheckEquals(Expected, Trim(FExecutionOutput),
       'The node.js output does not match!');
   end;
 end;
