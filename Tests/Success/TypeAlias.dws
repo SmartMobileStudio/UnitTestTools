@@ -1,0 +1,33 @@
+uses
+  ECMA.Console;
+
+type 
+  TColor = Integer;
+
+type
+  TMyClass = Class(TObject)
+  private
+     FColor: TColor;
+  protected
+    function GetColor: TColor;
+    procedure SetColor(Value: TColor);
+  public
+    property Color: TColor read GetColor write SetColor;
+  end;
+
+function TMyClass.GetColor: TColor;
+begin
+  Result := FColor;
+end;
+
+procedure TMyClass.SetColor(Value: TColor);
+begin
+  FColor := Value;
+end;
+   
+var o := new TMyClass;   
+   
+o.Color := 1234;
+Console.Log(o.Color);
+o.Color := o.Color * 10;
+Console.Log(o.Color);

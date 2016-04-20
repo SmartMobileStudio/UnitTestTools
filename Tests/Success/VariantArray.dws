@@ -1,0 +1,31 @@
+uses
+  ECMA.Console;
+
+function EmptyJSObject: Variant;
+begin
+  asm
+    @Result = {};
+  end;
+end;
+
+var 
+  v: Variant = EmptyJSObject;
+
+Console.Log(v.hasOwnProperty('test'));
+
+v.test := 'hello';
+Console.Log(v.hasOwnProperty('test'));
+
+Console.Log(v['test']);
+Console.Log(v.test);
+
+asm
+   delete @v['test'];
+end;
+Console.Log(v.hasOwnProperty('test'));
+
+v['test'] := 'world';
+Console.Log(v.hasOwnProperty('test'));
+
+Console.Log(v['test']);
+Console.Log(v.test);

@@ -1,0 +1,19 @@
+uses
+  ECMA.Console;
+
+function SubArray: Variant;
+begin
+  asm
+    @Result = {a:[1,2,16],b:["one", "two", "sixteen"]};
+  end;
+end;
+
+var 
+  v := SubArray;
+
+for var i := 0 to Integer(v.a.length - 1) do 
+  Console.Log(v.a[i].toString(16) + '=' + v.b[i]);
+
+Console.Log(v.b[0]);
+Console.Log(v.b[1]);
+Console.Log(v.b[2]);

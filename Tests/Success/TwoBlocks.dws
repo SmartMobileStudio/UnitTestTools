@@ -1,0 +1,10 @@
+uses
+  ECMA.Console;
+
+var 
+  hello: String;
+hello := 'hello';
+
+Console.Log(hello);
+Console.Log("javascript");
+Console.Log(hello);

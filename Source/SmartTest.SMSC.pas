@@ -91,10 +91,6 @@ begin
   // check if any JS output is expected
   if FileExists(ScriptFileName + '.js') then
   begin
-    // check the exit code of the command-line compiler
-    Check(FExitCode = 0, Format('Compilation failed with exit code %d',
-      [FExitCode]));
-
     // now check for the reference
     Check(FileExists(CompiledFileName), Format('File %s does not exist!',
       [CompiledFileName]));
@@ -127,6 +123,12 @@ begin
       // compare with actual message
       CheckEquals(Expected, Trim(MessageOutput),
         'Message output does not match!');
+    end
+    else
+    begin
+      // check the exit code of the command-line compiler
+      Check(FExitCode = 0, Format('Compilation failed with exit code %d',
+        [FExitCode]));
     end;
   end;
 end;

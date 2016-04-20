@@ -1,0 +1,29 @@
+uses
+  ECMA.Console;
+
+var 
+  v: Variant;
+
+asm @v = {}; end;
+
+type 
+  TRec = record
+  published
+    x: Integer;
+    n: String;
+  end;
+
+const 
+  c: TRec = (x: 0; n: 'hello');
+   
+v.rec := c;
+
+Console.Log(v);
+
+var vr: TRec;
+vr.x := 1;
+vr.n := 'world';
+   
+v.rec := vr;
+
+Console.Log(v);

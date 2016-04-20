@@ -1,0 +1,12 @@
+uses
+  ECMA.Console;
+
+procedure TestVar;
+var
+  v: Variant;
+begin
+  v := null;
+  Console.Log(v);
+end;
+
+TestVar;

@@ -1,0 +1,16 @@
+uses
+  ECMA.Console;
+
+type 
+  TClass1 = class 
+  end;
+
+type 
+  TClass2 = class(TClass1) 
+  end;
+
+Console.Log(TClass1.ClassName);
+Console.Log(TClass2.ClassName);
+
+
+

@@ -1,0 +1,16 @@
+uses
+  ECMA.Console;
+
+var 
+  v: Variant;
+
+asm
+   @v = { Data: { Fields: [ 'one', 2, { Value: 3 } ], Tag: 'Hello' }, Tag: 'world' };
+end;
+
+Console.Log(v.Data.Fields[0]);
+Console.Log(v.Data.Fields[1]);
+Console.Log(v.Data.Fields[1].toString());
+Console.Log(v.Data.Fields[2].Value.toString());
+Console.Log(v.Data.Tag);
+Console.Log(v.Tag);

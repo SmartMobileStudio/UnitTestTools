@@ -1,0 +1,9 @@
+uses
+  ECMA.Console, Hello;
+
+HelloFunc("world");
+
+var t := TTest.Create("test");
+t.Print;
+
+Console.Log(1+parseInt("2"));

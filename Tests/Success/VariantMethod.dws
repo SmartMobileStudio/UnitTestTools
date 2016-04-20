@@ -1,0 +1,18 @@
+uses
+  ECMA.Console;
+
+var 
+  v: Variant;
+
+asm @v = {}; end;
+
+procedure World;
+begin
+  Console.Log('World');
+end;
+
+v.Hello := procedure begin Console.Log('Hello') end;
+v.World := @World;
+
+v.Hello();
+v.World();
