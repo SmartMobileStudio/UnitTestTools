@@ -1,0 +1,39 @@
+uses
+  NodeJS.Core;
+
+var v : Variant;
+
+v := class
+   'hello' = 'world';
+   int123 : Integer = 123;
+   fl := 5/2;
+   ai : array [0..2] of Integer := [1, 2, 3];
+end;
+
+Console.Log(v);
+
+var i = 2;
+   
+v := class
+		helloWorld = 'cool'; external 'hello world';
+		subrec := class
+			one = 1;
+			two : String := IntToStr(i);
+		end;
+	private
+		function GetSubRecTwo : String;
+		begin
+		Result:='['+subrec.two+']';
+		end;
+	published
+		property SubRecTwo : String read GetSubRecTwo;
+end;
+
+Console.Log(v);
+
+v := class
+   four := i*i;
+   zero : Integer;
+end;
+
+Console.Log(v);
