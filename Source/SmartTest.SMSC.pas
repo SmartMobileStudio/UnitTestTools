@@ -30,6 +30,14 @@ uses
 
   dwsXPlatform;
 
+resourcestring
+  RStrOutputMessageMismatch = 'Message output does not match!';
+  RStrFileDoesNotExist = 'File %s does not exist!';
+  RStrCompilerOutputMismatch = 'The compiler output does not match!';
+  RStrErrorMessageMismatch = 'The error message does not match!';
+  RStrCompilationFailed = 'Compilation failed with exit code %d '#10 +
+    'and error log: %s';
+
 { TSmartMobileStudioExternalCompiler }
 
 procedure TSmartMobileStudioExternalCompiler.SetUp;
@@ -85,22 +93,21 @@ begin
     Expected := StringReplace(Expected, #$A, '', [rfReplaceAll]);
 
     // compare the message output with expected output
-    CheckEquals(Expected, FMessageOutput, 'The compiler output does not match!');
+    CheckEquals(Expected, FMessageOutput, RStrCompilerOutputMismatch);
   end;
 
   // check if any JS output is expected
   if FileExists(ScriptFileName + '.js') then
   begin
     // now check for the reference
-    Check(FileExists(CompiledFileName), Format('File %s does not exist!',
-      [CompiledFileName]));
+    Check(FileExists(CompiledFileName), Format(RStrFileDoesNotExist, [CompiledFileName]));
 
     // load expected and actual JavaScript code
     Expected := LoadTextFromFile(ScriptFileName + '.js');
     Output := LoadTextFromFile(CompiledFileName);
 
     // check if both are identical
-    CheckEquals(Expected, Output, 'The error message does not match!');
+    CheckEquals(Expected, Output, RStrErrorMessageMismatch);
   end
   else
   begin
@@ -121,15 +128,12 @@ begin
       Expected := Trim(StringReplace(Expected, #$A, '', [rfReplaceAll]));
 
       // compare with actual message
-      CheckEquals(Expected, Trim(MessageOutput),
-        'Message output does not match!');
+      CheckEquals(Expected, Trim(MessageOutput), RStrOutputMessageMismatch);
     end
     else
     begin
       // check the exit code of the command-line compiler
-      Check(FExitCode = 0, Format('Compilation failed with exit code %d '#10 +
-        'and error log: %s',
-        [FExitCode, MessageOutput]));
+      Check(FExitCode = 0, Format(RStrCompilationFailed, [FExitCode, MessageOutput]));
     end;
   end;
 end;

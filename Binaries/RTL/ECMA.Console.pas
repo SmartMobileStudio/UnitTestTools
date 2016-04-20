@@ -1,4 +1,4 @@
-unit BasicConsole;
+unit ECMA.Console;
 
 interface
 

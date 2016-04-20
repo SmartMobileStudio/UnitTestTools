@@ -61,6 +61,8 @@ uses
 
 resourcestring
   RStrMissingScript = 'Specified script does not exist: %s';
+  RStrNodejsOutputMismatch = 'The node.js output does not match!';
+  RStrDirectoryDoesNotExist = 'Directory does not exists (%s)';
 
 { TSmartMobileStudioCustomScriptTest }
 procedure TSmartMobileStudioCustomScriptTest.PipedExecutionExitHandler(Sender: TObject; ExitCode: Cardinal);
@@ -136,8 +138,7 @@ begin
     Expected := LoadTextFromFile(ScriptFileName + '.result');
     Expected := Trim(StringReplace(Expected, #$D, '', [rfReplaceAll]));
 
-    CheckEquals(Expected, Trim(FExecutionOutput),
-      'The node.js output does not match!');
+    CheckEquals(Expected, Trim(FExecutionOutput), RStrNodejsOutputMismatch);
   end;
 end;
 
@@ -220,7 +221,7 @@ begin
   try
     // set tesst project directory
     if not DirectoryExists(Dir) then
-      raise Exception.CreateFmt('Directory does not exists (%s)', [Dir]);
+      raise Exception.CreateFmt(RStrDirectoryDoesNotExist, [Dir]);
 
     CollectFiles(Dir, '*' + Extension, TestProjectFiles);
 
