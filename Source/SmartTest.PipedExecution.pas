@@ -33,7 +33,66 @@ type
     property OnExit: TOnExit read FOnExit write FOnExit;
   end;
 
+function RunExecutable(Executable: string): string;
+
 implementation
+
+type
+  TPipedExecutionRunner = class
+  private
+    FPipedExecution: TPipedExecution;
+    FExecutable: string;
+    FOutput: string;
+    FExitCode: Integer;
+    procedure ExitHandler(Sender: TObject; ExitCode: Cardinal);
+    procedure NewLineHandler(Sender: TObject; const Text: string);
+  public
+    constructor Create(const Executable: string);
+    procedure Run;
+
+    property ExitCode: Integer read FExitCode;
+    property Output: string read FOutput;
+  end;
+
+constructor TPipedExecutionRunner.Create(const Executable: string);
+begin
+  FExecutable := Executable;
+end;
+
+procedure TPipedExecutionRunner.ExitHandler(Sender: TObject; ExitCode: Cardinal);
+begin
+  FPipedExecution := nil;
+  FExitCode := ExitCode;
+end;
+
+procedure TPipedExecutionRunner.NewLineHandler(Sender: TObject; const Text: string);
+begin
+  FOutput := FOutput + Text + #10;
+end;
+
+procedure TPipedExecutionRunner.Run;
+begin
+  FPipedExecution := TPipedExecution.Create(FExecutable, '.',
+    NewLineHandler, ExitHandler);
+
+  while Assigned(FPipedExecution) do
+    FPipedExecution.Peek;
+
+  FPipedExecution.Free;
+end;
+
+function RunExecutable(Executable: string): string;
+var
+  Runner: TPipedExecutionRunner;
+begin
+  Runner := TPipedExecutionRunner.Create(Executable);
+  try
+    Runner.Run;
+    Result := Runner.Output;
+  finally
+    Runner.Free;
+  end;
+end;
 
 
 { TPipedExecution }
