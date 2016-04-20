@@ -1,0 +1,1 @@
+This invalid pascal file should show a proper error message
