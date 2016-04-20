@@ -1,0 +1,49 @@
+uses
+  ECMA.Console;
+
+type 
+  TEvent = procedure (msg: String);
+
+type 
+  TMyClass = class
+    FEvent: TEvent;
+
+    procedure SetEvent(evt: TEvent);
+    begin
+      FEvent := evt;
+    end;
+
+    procedure Invoke(s: String);
+    begin
+      FEvent(s);
+    end;
+
+    property Event: TEvent write SetEvent;
+  end;
+   
+type 
+  TTestClass = class
+    Field: String;
+    procedure Bind(mc: TMyClass);
+    begin
+      mc.Event := procedure (msg: String) 
+        begin 
+          Console.Log(Field); 
+          Console.Log(msg); 
+        end;
+    end;
+  end;
+   
+var o := new TMyClass;
+
+o.Event := procedure (msg: String) 
+  begin 
+    Console.Log('hello '+msg); 
+  end;
+o.Invoke('world');
+
+var b := new TTestClass;
+b.Field := 'byebye';   
+b.Bind(o);
+
+o.Invoke('World');
