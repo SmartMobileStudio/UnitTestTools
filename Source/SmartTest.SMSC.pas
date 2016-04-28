@@ -84,6 +84,10 @@ var
   InputFile: string;
 begin
   inherited;
+  
+  // eventually compile script
+  if not FileExists(CompiledFileName) then
+    Compile; 
 
   // check if any command-line output is expected
   if FileExists(ScriptFileName + '.out') then

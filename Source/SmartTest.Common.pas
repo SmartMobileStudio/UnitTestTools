@@ -64,7 +64,9 @@ resourcestring
   RStrNodejsOutputMismatch = 'The node.js output does not match!';
   RStrDirectoryDoesNotExist = 'Directory does not exists (%s)';
 
+
 { TSmartMobileStudioCustomScriptTest }
+
 procedure TSmartMobileStudioCustomScriptTest.PipedExecutionExitHandler(Sender: TObject; ExitCode: Cardinal);
 begin
   FPipedExecution := nil;
